@@ -1,6 +1,6 @@
-
 import logging
 from fuzzywuzzy import fuzz
+
 
 class WordFinder:
     """
@@ -41,7 +41,9 @@ class WordFinder:
         if self.sentence is None:
             return ""
 
-        return ''.join(char.lower() if char.isalpha() else ' ' for char in self.sentence)
+        return "".join(
+            char.lower() if char.isalpha() else " " for char in self.sentence
+        )
 
     def find_words(self, target_words, similarity_threshold=80):
         """
@@ -60,7 +62,10 @@ class WordFinder:
         found_words = set()
         for target_word in target_words:
             for cleaned_word in cleaned_words:
-                if fuzz.ratio(target_word.lower(), cleaned_word) >= similarity_threshold:
+                if (
+                    fuzz.ratio(target_word.lower(), cleaned_word)
+                    >= similarity_threshold
+                ):
                     found_words.add(cleaned_word)
                     break
 
